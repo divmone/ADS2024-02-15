@@ -14,96 +14,246 @@ public class ListC<E> implements List<E> {
     //////               Обязательные к реализации методы             ///////
     /////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////
+    private class ListElem{
+        private E value;
+        private ListElem nextElem = null;
+    }
+
+    private ListElem listHead = null;
     @Override
     public String toString() {
-        return "";
+        StringBuilder answer = new StringBuilder("");
+        ListElem curElem = listHead;
+        answer.append('[');
+        while (curElem != null){
+            answer.append(curElem.value.toString());
+            curElem = curElem.nextElem;
+            if (curElem != null){
+                answer.append(", ");
+            }
+        }
+        answer.append(']');
+        return answer.toString();
     }
 
     @Override
     public boolean add(E e) {
-        return false;
+        ListElem newElem = new ListElem();
+        newElem.value = e;
+        ListElem curElem = listHead;
+        if (listHead == null){
+            listHead = newElem;
+        }
+        else {
+            while (curElem.nextElem != null){
+                curElem = curElem.nextElem;
+            }
+            curElem.nextElem = newElem;
+        }
+        return true;
     }
 
     @Override
     public E remove(int index) {
-        return null;
+        E result;
+        ListElem curElem = listHead;
+        if (index == 0){
+            result = listHead.value;
+            listHead = listHead.nextElem;
+        }
+        else{
+            for (int i = 0; i < index - 1; i++) {
+                curElem = curElem.nextElem;
+                if (curElem == null){
+                    result = null;
+                }
+            }
+            result = (E) curElem.nextElem.value;
+            curElem.nextElem = curElem.nextElem.nextElem;
+        }
+        return (E) result;
     }
 
     @Override
     public int size() {
-        return 0;
+        int counter = 0;
+        ListElem curElem = listHead;
+        while (curElem != null){
+            counter++;
+            curElem = curElem.nextElem;
+        }
+        return counter;
     }
 
     @Override
     public void add(int index, E element) {
-
+        ListElem newElem = new ListElem();
+        newElem.value = element;
+        ListElem curElem = listHead;
+        if (index == 0){
+            newElem.nextElem = listHead;
+            listHead = newElem;
+        }
+        else {
+            for (int i = 0; i < index - 1; i++) {
+                curElem = curElem.nextElem;
+            }
+            newElem.nextElem = curElem.nextElem;
+            curElem.nextElem = newElem;
+        }
     }
 
     @Override
     public boolean remove(Object o) {
+        ListElem curElem = listHead;
+        if (o.equals(curElem.value)){
+            listHead = listHead.nextElem;
+            return true;
+        }
+        while (curElem.nextElem != null){
+            if (o.equals(curElem.nextElem.value)){
+                curElem.nextElem = curElem.nextElem.nextElem;
+                return true;
+            }
+            curElem = curElem.nextElem;
+        }
         return false;
     }
 
     @Override
     public E set(int index, E element) {
-        return null;
+        ListElem curElem = listHead;
+        for (int i = 0; i < index; i++) {
+            curElem = curElem.nextElem;
+        }
+        E answer = curElem.value;
+        curElem.value = element;
+        return answer;
     }
 
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return listHead == null;
     }
 
 
     @Override
     public void clear() {
-
+        listHead = null;
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        ListElem curElem = listHead;
+        int index = -1;
+        while (curElem != null){
+            index++;
+            if (o.equals(curElem.value)){
+                return index;
+            }
+            curElem = curElem.nextElem;
+        }
+        return -1;
     }
 
     @Override
     public E get(int index) {
-        return null;
+        ListElem curElem = listHead;
+        for (int i = 0; i < index; i++) {
+            curElem = curElem.nextElem;
+        }
+        return curElem.value;
     }
 
     @Override
     public boolean contains(Object o) {
+        ListElem curElem = listHead;
+        while (curElem != null){
+            if (o.equals(curElem.value)){
+                return true;
+            }
+            curElem = curElem.nextElem;
+        }
         return false;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        int answer = -1;
+        int counter = 0;
+        ListElem curElem = listHead;
+        while (curElem != null){
+            if (o.equals(curElem.value)){
+                answer = counter;
+            }
+            curElem = curElem.nextElem;
+            counter++;
+        }
+        return answer;
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        ListElem curElem = listHead;
+        E[] collectionAsArray = (E[]) c.toArray();
+        for (E e : collectionAsArray) {
+            if (!contains(e)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        E[] collectionAsArray = (E[]) c.toArray();
+        for (int i = 0; i < collectionAsArray.length; i++) {
+            add(collectionAsArray[i]);
+        }
+        return collectionAsArray.length > 0;
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        E[] collectionAsArray = (E[]) c.toArray();
+        for (int i = 0; i < collectionAsArray.length; i++) {
+            add(index, collectionAsArray[i]);
+            index++;
+        }
+        return collectionAsArray.length > 0;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        ListElem curElem = listHead;
+        boolean answer = false;
+        while (curElem != null){
+            if (c.contains(curElem.value)){
+                answer = true;
+                remove(curElem.value);
+                curElem = listHead;
+                continue;
+            }
+            curElem = curElem.nextElem;
+        }
+        return answer;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        boolean answer = false;
+        ListElem curElem = listHead;
+        while (curElem != null){
+            if (!c.contains(curElem.value)){
+                answer = true;
+                remove(curElem.value);
+                curElem = listHead;
+                continue;
+            }
+            curElem = curElem.nextElem;
+        }
+        return answer;
     }
 
     /////////////////////////////////////////////////////////////////////////
