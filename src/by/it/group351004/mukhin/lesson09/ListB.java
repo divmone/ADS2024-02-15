@@ -138,7 +138,7 @@ public class ListB<E> implements List<E> {
 
     @Override
     public boolean contains(Object o) {
-        return indexOf(o) != -1;
+        return indexOf(o) != -1 ;
     }
 
     @Override

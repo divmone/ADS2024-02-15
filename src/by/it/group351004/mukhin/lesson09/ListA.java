@@ -20,7 +20,7 @@ public class ListA<E> implements List<E> {
     int _current;
 
     public ListA() {
-        this(defaultSize);
+        this(defaultSize) ;
     }
 
 
