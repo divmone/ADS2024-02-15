@@ -1,9 +1,6 @@
 package by.it.group351003.zhigimont.lesson09;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class ListA<E> implements List<E> {
 
@@ -24,7 +21,7 @@ public class ListA<E> implements List<E> {
     private ListElem listHead = null;
     @Override
     public String toString() {
-        StringBuilder answer = new StringBuilder("");
+        StringBuilder answer = new StringBuilder();
         ListElem curElem = listHead;
         answer.append('[');
         while (curElem != null){
@@ -65,12 +62,12 @@ public class ListA<E> implements List<E> {
         }
         else{
             for (int i = 0; i < index - 1; i++) {
-                curElem = curElem.nextElem;
+                curElem = Objects.requireNonNull(curElem).nextElem;
                 if (curElem == null){
                     result = null;
                 }
             }
-            result = (E) curElem.nextElem.value;
+            result = (E) Objects.requireNonNull(curElem).nextElem.value;
             curElem.nextElem = curElem.nextElem.nextElem;
         }
         return (E) result;
