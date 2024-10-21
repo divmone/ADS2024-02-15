@@ -1,17 +1,18 @@
 package by.it.group351004.mukhin.lesson10;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-public class ArrayDeque<E> implements Deque<E> {
+public class MyArrayDeque<E> implements Deque<E> {
 
     final int defaultSize = 8;
     int _front;
     int _rear;
     E[] _items;
     int Count;
-    ArrayDeque() {
+    MyArrayDeque() {
         _items = (E[]) new Object[defaultSize];
         _rear = -1;
     }
