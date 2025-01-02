@@ -1,8 +1,8 @@
-package by.it.group310901.sikachenko.lesson02;
+package by.it.group310901.sikachenkoliana.lesson02;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 /*
 Даны события events
 реализуйте метод calcStartTimes, так, чтобы число включений регистратора на

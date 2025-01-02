@@ -1,4 +1,4 @@
-package by.it.group310901.sikachenko.lesson02;
+package by.it.group310901.sikachenkoliana.lesson02;
 /*
 Даны
 1) объем рюкзака 4
@@ -12,10 +12,11 @@ package by.it.group310901.sikachenko.lesson02;
 Необходимо собрать наиболее дорогой вариант рюкзака для этого объема
 Предметы можно резать на кусочки (т.е. алгоритм будет жадным)
  */
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.Arrays;
+import java.util.Scanner;
 public class C_GreedyKnapsack {
     private static class Item implements Comparable<Item> {
         int cost;

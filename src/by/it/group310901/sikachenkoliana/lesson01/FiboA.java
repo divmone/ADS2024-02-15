@@ -1,4 +1,4 @@
-package by.it.group310901.sikachenko.lesson01;
+package by.it.group310901.sikachenkoliana.lesson01;
 
 import java.math.BigInteger;
 
