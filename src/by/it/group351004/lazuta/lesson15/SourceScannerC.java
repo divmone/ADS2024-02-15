@@ -39,7 +39,8 @@ public class SourceScannerC extends SourceScannerA{
                 prevRow = currRow;
                 currRow = new int[length];
 
-                for (int j = 0; j <= s2.length(); j++) {
+                for (int j = 0; j <= s2.length(); j++)
+                {
                     currRow[j] = i == 0 ? j : (j == 0 ? i : getMinEdit(prevRow[j - 1]
                                     + areReplacementNumbers(s1.charAt(i - 1), s2.charAt(j - 1)),
                             prevRow[j] + 1,
