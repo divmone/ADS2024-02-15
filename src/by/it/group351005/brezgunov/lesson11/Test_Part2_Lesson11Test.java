@@ -45,7 +45,7 @@ public class Test_Part2_Lesson11Test extends HomeWork {
         randomCheck("MyHashSet", methods);
     }
 
-    @Test(timeout = 500000000)
+    @Test(timeout = 5000)
     public void testTaskB() throws Exception {
         String[] methods = """
                 toString()
@@ -65,7 +65,7 @@ public class Test_Part2_Lesson11Test extends HomeWork {
         randomCheck("MyLinkedHashSet", methods);
     }
 
-    @Test(timeout = 5000000)
+    @Test(timeout = 5000)
     public void testTaskC() throws Exception {
         String[] methods = """
                 toString()
